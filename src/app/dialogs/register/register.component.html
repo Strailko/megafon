@@ -1,0 +1,53 @@
+<div>
+    <h2 mat-dialog-title>Регистрација</h2>
+    <mat-dialog-content>
+        <div class="example-container">
+            <img style="width: 30%; padding-bottom: 1em;" [src]="user.avatar">
+            <mat-form-field appearance="fill" style="padding-bottom: 1em;">
+                <mat-label>Профилна слика</mat-label>
+                <mat-select placeholder="Avatar" [(ngModel)]="user.avatar" *ngIf="!avatarFlag">
+                  <mat-option value="option" *ngFor="let avatar of avatars; let i = index" [value]="avatar" (click)="avatarFlag = false">
+                    <mat-icon><img [src]="avatar"></mat-icon> Avatar {{i+1}}
+                  </mat-option>
+                  <mat-option value="https://i.ibb.co/KF2WBB3/u1.png" (click)="avatarFlag = true">
+                      Сопствена фотографија
+                  </mat-option>
+                </mat-select>
+                <input *ngIf="avatarFlag" matInput type="text" placeholder="Link (ex. https://i.ibb.co/KF2WBB3/u1.png)" [formControl]="avatar" [(ngModel)]="user.avatar" required>
+                <mat-error *ngIf="avatar.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="padding-bottom: 1em;">
+                <mat-label>Име</mat-label>
+                <input matInput type="text" placeholder="Name" [formControl]="name" [(ngModel)]="user.name" required>
+                <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="padding-bottom: 1em;">
+                <mat-label>Презиме</mat-label>
+                <input matInput type="text" placeholder="Surname" [formControl]="surname" [(ngModel)]="user.surname" required>
+                <mat-error *ngIf="surname.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="padding-bottom: 1em;">
+                <mat-label>Е-пошта</mat-label>
+                <input matInput type="text" placeholder="Email" [formControl]="email" [(ngModel)]="user.email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="padding-bottom: 1em;">
+                <mat-label>Лозинка</mat-label>
+                <input matInput type="password" placeholder="Password" [formControl]="password" [(ngModel)]="user.password" required>
+                <mat-error *ngIf="password.invalid">{{getErrorMessagePass()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Кратка биографија</mat-label>
+                <textarea matInput placeholder="Bio" [formControl]="bio" [(ngModel)]="user.bio" required></textarea>
+              </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button color="primary" (click)="register()">
+            <mat-icon>input</mat-icon> Регистрирај се
+        </button>
+        <button mat-button color="primary" (click)="dismiss()">
+            <mat-icon>cancel</mat-icon> Затвори
+        </button>
+    </mat-dialog-actions>
+</div>

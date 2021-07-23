@@ -1,0 +1,12 @@
+<div (keyup.enter)="search()">
+    <mat-dialog-content>
+        <div class="example-container">
+            <mat-form-field appearance="fill">
+              <input matInput (keyup.enter)="search()" type="text" placeholder="Пребараj..." [formControl]="query" [(ngModel)]="searchQuery" required>
+            </mat-form-field>
+            <button mat-button color="primary" (click)="search()">
+                <mat-icon>search</mat-icon> Пребарај
+            </button>
+        </div>
+    </mat-dialog-content>
+</div>

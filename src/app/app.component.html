@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+
+<div class="container app-container">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <router-outlet *ngIf="!loading"></router-outlet>
+</div>
+
+<app-footer></app-footer>

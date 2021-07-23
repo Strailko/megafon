@@ -1,0 +1,27 @@
+<p>
+    <mat-toolbar color="primary">
+      <div [routerLink]='["/"]' class="image-container">
+        <img src="../../assets/logo-top.png">
+      </div>
+      <span [routerLink]='["/"]'>МЕГАФОН</span>
+      <span class="example-spacer"></span>
+      <button *ngIf="!isSmallScreen" style="border-radius: 0px !important; height: 50%;" (click)="openSearchBoxDialog()" mat-flat-button>Пребарај... <mat-icon>search</mat-icon></button>
+      <button *ngIf="!loggedIn && !isSmallScreen" style="border-radius: 0px !important; margin: 0 1em; height: 50%;" (click)="openRegisterDialog()" mat-flat-button>Регистрација <mat-icon>account_circle</mat-icon></button>
+      <button *ngIf="loggedIn && !isSmallScreen" style="border-radius: 0px !important; margin: 0 1em; height: 50%;" [routerLink]="['/newsfeed']" mat-flat-button>Ѕид на новости <mat-icon>receipt</mat-icon></button>
+      <button *ngIf="!loggedIn && !isSmallScreen" style="border-radius: 0px !important; margin-right: 0.5em; height: 50%;" (click)="openLoginDialog()" mat-flat-button>Најава <mat-icon>supervisor_account</mat-icon></button>
+      <button *ngIf="loggedIn && !isSmallScreen" style="border-radius: 0px !important; margin-right: 0.5em; height: 50%;" [routerLink]="['/userprofile/' + user.id]" mat-flat-button>Username <div class="image-container"><img src="{{user.avatar}}"></div></button>
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="icon-button with more_vert icon">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button *ngIf="isSmallScreen" (click)="openSearchBoxDialog()" mat-menu-item><mat-icon>search</mat-icon>Пребарај...</button>
+        <button *ngIf="!loggedIn && isSmallScreen" (click)="openLoginDialog()" mat-menu-item><mat-icon>supervisor_account</mat-icon>Најава</button>
+        <button *ngIf="!loggedIn && isSmallScreen" (click)="openRegisterDialog()" mat-menu-item><mat-icon>account_circle</mat-icon>Регистрација</button>
+        <button *ngIf="loggedIn && isSmallScreen" [routerLink]="['/newsfeed']" mat-menu-item><mat-icon>receipt</mat-icon>Ѕид на новости</button>
+        <button *ngIf="loggedIn && isSmallScreen" [routerLink]="['/userprofile/' + user.id]" mat-menu-item><div class="image-container"><img src="{{user.avatar}}"></div>Мој профил</button>
+        <button mat-menu-item [routerLink]="['/']"><mat-icon>home</mat-icon>Почетна</button>
+        <button mat-menu-item [routerLink]="['/categories']"><mat-icon>apps</mat-icon>Категории</button>
+        <button mat-menu-item [routerLink]="['/map']"><mat-icon>map</mat-icon>Мапа</button>
+      </mat-menu>
+    </mat-toolbar>
+</p>

@@ -1,0 +1,55 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.active {
+  color: red;
+  transition: all 1s ease;
+}
+
+span {
+  font-size: x-large;
+  padding-left: 0.5em;
+}
+
+.not-active {
+  color: white;
+  transition: all 1s ease;
+}
+
+.image-container {
+  width: 3em;
+  height: 1.5em;
+  position: relative;
+}
+
+.image-container img {
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto auto;
+}
+
+svg {
+  color: white;
+}
+
+@media screen and (max-device-width: 440px) {
+  span {
+    font-size: smaller;
+  }
+}
+@media screen and (max-device-width: 380px) {
+  span {
+    font-size: 12px;
+  }
+}
+@media screen and (max-device-width: 320px) {
+  span {
+    font-size: 10px;
+  }
+}

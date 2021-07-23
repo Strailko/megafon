@@ -1,0 +1,218 @@
+.upper {
+    padding: 1em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .link {
+    padding: 1em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .link a {
+    font-size: larger;
+  }
+  
+  h1 {
+    padding: 0.5em;
+    font-size: x-large;
+    font-weight: 500;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .searchbox {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 3em;
+    padding: 2em;
+    border: 1px solid #D1D6DF;
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .selects {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    min-width: 100%;
+    border-bottom: 1px solid #D1D6DF;
+    flex-direction: row;
+    padding-top: 1em;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  mat-form-field {
+    padding: 0 0.5em;
+  }
+  
+  .container {
+    width: 100%;
+    min-width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .cardbox {
+    padding: 0;
+    padding-bottom: 2em;
+    margin: 0;
+    list-style: none;
+    border-bottom: 1px solid #D1D6DF;
+    -ms-box-orient: horizontal;
+    display: -moz-flex;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  .wrap {
+    flex-wrap: wrap;
+  }
+  
+  .w-full {
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  .search {
+    margin: 1em;
+    font-size: 15px;
+    border-radius: 100%;
+  }
+  
+  .search:hover {
+    transform: scale(1.05);
+  }
+  
+  .flex-item .justify-end mat-icon {
+    color: white;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+  
+  .flex-item {
+    width: 33%;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .loader {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 100px;
+  }
+  
+  .paramEditor-selects {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .btns-flex {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .btns-flex button {
+    margin: 1em;
+  }
+  
+  .desktopWidth {
+    width: 85% !important;
+  }
+  
+  @media only screen and (min-width: 10px) and (max-width: 1200px), only screen and (min-device-width: 10px) and (max-device-width: 1200px) {
+    .flex-item {
+      width: 33%;
+    }
+  }
+  @media only screen and (min-width: 10px) and (max-width: 767px), only screen and (min-device-width: 10px) and (max-device-width: 767px) {
+    .flex-item {
+      width: 100%;
+    }
+  
+    .controls {
+      flex-direction: column;
+    }
+  
+    .paramEditor-selects {
+      justify-content: center;
+      flex-direction: column;
+    }
+  
+    .search {
+      width: 100%;
+    }
+  
+    mat-form-field {
+      padding: 0;
+    }
+  
+    .btns-flex {
+      flex-direction: column;
+    }
+  
+    .btns-flex button {
+      margin: 0.5em;
+    }
+  
+    .flexDiv {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+    }
+  }
+  @media only screen and (min-width: 10px) and (max-width: 450px), only screen and (min-device-width: 10px) and (max-device-width: 450px) {
+    .flexcol {
+      flex-direction: column;
+    }
+  
+    .desktopWidth {
+      width: initial !important;
+    }
+  }
+  .nowrap {
+    white-space: nowrap;
+  }

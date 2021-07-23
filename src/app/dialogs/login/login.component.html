@@ -1,0 +1,25 @@
+<div (keyup.enter)="login()">
+    <h2 mat-dialog-title>Најава</h2>
+    <mat-dialog-content>
+        <div class="example-container">
+            <mat-form-field appearance="fill" style="padding-bottom: 1em;">
+              <mat-label>Е-пошта</mat-label>
+              <input matInput type="text" (keyup.enter)="login()" placeholder="Email" [formControl]="email" [(ngModel)]="user.email" required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Лозинка</mat-label>
+                <input matInput (keyup.enter)="login()" type="password" placeholder="Password" [formControl]="password" [(ngModel)]="user.password" required>
+                <mat-error *ngIf="password.invalid">{{getErrorMessagePass()}}</mat-error>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button color="primary" (click)="login()">
+            <mat-icon>input</mat-icon> Најава
+        </button>
+        <button mat-button color="primary" (click)="dismiss()">
+            <mat-icon>cancel</mat-icon> Затвори
+        </button>
+    </mat-dialog-actions>
+</div>
