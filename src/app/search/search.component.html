@@ -3,78 +3,55 @@
         <h1>РЕЗУЛТАТИ ОД ПРЕБАРУВАЊЕ:</h1>
         <div class="box">
         
-            <div class="flex-item orgs" style="border-right: 1px solid lightgray;">
-                <h2>Организации:</h2>
+            <div class="flex-item orgs" *ngIf="type == '' || type == 'organisations'">
+                <h2 *ngIf="orgs.length != 0">Организации:</h2>
                 <div class="cards">
-                    <div class="small-card">
+                    <div class="small-card" *ngFor="let org of orgs" [routerLink]="['/profile/view/' + org.id]">
                         <div class="image-container">
-                            <img src="../../assets/u1.png">
+                            <img [src]="org.photo">
                         </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
+                        <span>{{ org.name }}</span>
                     </div>
                 </div>
             </div>
     
-            <div class="flex-item events">
-                <h2>Настани:</h2>
+            <div class="flex-item events" *ngIf="type == '' || type == 'events'">
+                <h2 *ngIf="events.length != 0">Настани:</h2>
                 <div class="cards">
-                    <div class="small-card">
+                    <div class="small-card" *ngFor="let event of events" [routerLink]="['/profile/view/' + event.id]">
                         <div class="image-container">
-                            <img src="../../assets/u1.png">
+                            <img [src]="event.photo">
                         </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
+                        <span>{{ event.name }}</span>
                     </div>
                 </div>
             </div>
     
-            <div class="flex-item profiles" style="border-right: 1px solid lightgray; border-top: 1px solid lightgray;">
-                <h2>Профили:</h2>
+            <div class="flex-item profiles" *ngIf="type == '' || type == 'profiles'">
+                <h2 *ngIf="users.length != 0">Профили:</h2>
                 <div class="cards">
-                    <div class="small-card">
+                    <div class="small-card" *ngFor="let profile of users" [routerLink]="['/userprofile/' + profile.id]">
                         <div class="image-container">
-                            <img src="../../assets/u1.png">
+                            <img [src]="profile.avatar">
                         </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
+                        <span>{{ profile.name }} {{ profile.surname }}</span>
                     </div>
                 </div>
             </div>
     
-            <div class="flex-item initiatives" style="border-top: 1px solid lightgray;">
-                <h2>Иницијативи:</h2>
+            <div class="flex-item initiatives" *ngIf="type == '' || type == 'initiatives'">
+                <h2 *ngIf="initiatives.length != 0">Иницијативи:</h2>
                     <div class="cards">
-                    <div class="small-card">
+                    <div class="small-card" *ngFor="let initiative of initiatives" [routerLink]="['/profile/view/' + initiative.id]">
                         <div class="image-container">
-                            <img src="../../assets/u1.png">
+                            <img [src]="initiative.photo">
                         </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
+                        <span>{{ initiative.name }}</span>
                     </div>
                 </div>
             </div>
-    
+            
+            <h2 *ngIf="this.entities.length < 1 && this.users.length < 1" style="padding: 2em;">Нема резултати.</h2>
         </div>
     </div>
 

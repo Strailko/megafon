@@ -7,8 +7,7 @@ import { RegisterComponent } from '../dialogs/register/register.component';
 import { SearchboxComponent } from '../dialogs/searchbox/searchbox.component';
 import { AuthService } from '../shared/auth.service';
 import { User } from '../shared/interfaces';
-import { UserService } from '../shared/user.service';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-navbar',
@@ -17,9 +16,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class NavbarComponent implements OnInit {
   loggedIn: boolean = false;
-  user: User = {
-    id: 0
-  };
+  user: User = {};
 
   constructor(private dialog: MatDialog, private _snackBar: MatSnackBar, private router: Router, private authService: AuthService, private breakpointObserver: BreakpointObserver) { }
 
@@ -27,6 +24,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getLoggedInUser();
+    if(JSON.stringify(this.user) !== '{}') {
+      this.loggedIn = true;
+    }
     this.breakpointObserver.observe([
       '(max-width: 768px)'
         ]).subscribe(result => {
@@ -45,9 +45,21 @@ export class NavbarComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.openSnackBar("Успешна најава", "Одете до вашиот профил").onAction().subscribe(() => {
-          this.router.navigate(['/userprofile', result.id]);
-        });
+        let id = this.authService.login(result);
+
+        if(id != undefined && id != null) {
+          this.user = this.authService.getLoggedInUser();
+          this.loggedIn = true;
+          this.user.id = id;
+          this.openSnackBar("Успешна најава", "Одете до вашиот профил").onAction().subscribe(() => {
+            this.router.navigate(['/userprofile', id]);
+          });
+        }
+        else {
+          this.openSnackBar("Неуспешна најава", "Обидете се повторно").onAction().subscribe(() => {
+            this.openLoginDialog();
+          });
+        }
       }
       else {
         this.openSnackBar("Неуспешна најава", "Обидете се повторно").onAction().subscribe(() => {
@@ -63,9 +75,17 @@ export class NavbarComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.openSnackBar("Успешна регистрација", "Најави се").onAction().subscribe(() => {
-          this.openLoginDialog();
-        });
+        let status = this.authService.register(result);
+        if(status) {
+          this.openSnackBar("Успешна регистрација", "Најави се").onAction().subscribe(() => {
+            this.openLoginDialog();
+          });
+        }
+        else {
+          this.openSnackBar("Неуспешна регистрација", "Обидете се повторно").onAction().subscribe(() => {
+            this.openRegisterDialog();
+          });
+        }
       }
       else {
         this.openSnackBar("Неуспешна регистрација", "Обидете се повторно").onAction().subscribe(() => {
@@ -81,11 +101,23 @@ export class NavbarComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.router.navigate(["/search/" + result]);
+        if(result.category == '') {
+          this.router.navigate(["/search/" + result.searchQuery]);
+        }
+        else {
+          this.router.navigate(["/search/" + result.searchQuery + "/" + result.category]);
+        }
       }
     });
   }
 
+  logout():void {
+    this.authService.logout();
+    this.loggedIn = false;
+    this.user = {};
+    this.router.navigate(["/"]);
+    this.openSnackBar("Успешна одјава", "Во ред")
+  }
 
   openSnackBar(message: string, action: string) : MatSnackBarRef<SimpleSnackBar> {
     return this._snackBar.open(message, action, {

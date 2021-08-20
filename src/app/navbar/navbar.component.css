@@ -34,6 +34,14 @@ span {
   margin: auto auto;
 }
 
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  text-align: center;
+  flex-direction: row;
+}
+
 svg {
   color: white;
 }

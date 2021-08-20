@@ -9,6 +9,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class SearchboxComponent implements OnInit {
   searchQuery: string = "";
+  category: string = "";
+  obj = {
+    searchQuery: '',
+    category: ''
+  };
 
   constructor(private dialogRef : MatDialogRef<SearchboxComponent>) { }
 
@@ -16,12 +21,12 @@ export class SearchboxComponent implements OnInit {
   }
 
   search() {
-    if(this.searchQuery != "") {
-      this.dialogRef.close(this.searchQuery);
+    if(this.searchQuery == "") {
+      this.searchQuery = "*";
     }
-    else {
-      this.dialogRef.close(null);
-    }
+    this.obj.searchQuery = this.searchQuery;
+    this.obj.category = this.category;
+    this.dialogRef.close(this.obj);
   }
   
   query = new FormControl('', [Validators.required]);

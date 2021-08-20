@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/shared/interfaces';
-import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-register',
@@ -27,20 +26,18 @@ export class RegisterComponent implements OnInit {
     avatar: this.avatars[0]
   };
 
-  constructor(private dialogRef : MatDialogRef<RegisterComponent>, private userService: UserService) { }
+  constructor(private dialogRef : MatDialogRef<RegisterComponent>) { }
 
   ngOnInit(): void {
   }
 
-  save(){
-    this.userService.addUser(this.user).then(user => {
-      this.dialogRef.close(user);
-    });
-  }
-
   register() {
-    console.log("works");
-    this.dialogRef.close(this.user);
+    if(this.user.email !== '' && this.user.password !== '' && this.user.name !== '' && this.user.surname !== '' && this.user.bio !== '' && this.user.avatar !== '') {
+      this.dialogRef.close(this.user);
+    }
+    else {
+      this.dialogRef.close(null);      
+    }
   }
   
   dismiss(){

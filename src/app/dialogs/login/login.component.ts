@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/shared/interfaces';
-import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,24 +10,16 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class LoginComponent implements OnInit {
   user: User = {
-    id: 0,
     email: '',
     password: ''
   };
 
-  constructor(private dialogRef : MatDialogRef<LoginComponent>, private userService: UserService) { }
+  constructor(private dialogRef : MatDialogRef<LoginComponent>) { }
 
   ngOnInit(): void {
   }
 
-  save(){
-    this.userService.addUser(this.user).then(user => {
-      this.dialogRef.close(user);
-    });
-  }
-
   login() {
-    console.log("works");
     this.dialogRef.close(this.user);
   }
   

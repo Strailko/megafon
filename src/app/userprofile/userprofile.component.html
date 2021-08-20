@@ -7,11 +7,11 @@
             <div class="profile-card flex items-center justify-center" style="width: 100%; flex-direction: row;">
                 <div class="flex-item" style="align-items: start !important;">
                     <div class="image-container-profile">
-                        <img src="../../assets/u1.png">
+                        <img [src]="user?.avatar">
                     </div>
                 </div>
                 <div class="flex-item">
-                    <h1 style="width: 200%; margin: 0 !important;">Спасе Спасески</h1>
+                    <h1 style="width: 200%; margin: 0 !important;">{{ user?.name }} {{ user?.surname }}</h1>
                 </div>
                 <div class="flex-item flex justify-center items-center" style="flex-direction: row;">
                     <mat-icon>
@@ -23,45 +23,22 @@
                 </div>
             </div>
             <div class="profile-card p-4 text-gray-800" style="text-align: left; width: 100%; border-bottom: 2px solid lightgray;">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus, deleniti reprehenderit pariatur repellat in fuga voluptas magnam odit blanditiis mollitia perspiciatis quibusdam sunt quam inventore velit modi possimus earum amet.
+                {{ user?.bio }}
             </div>
-            <div class="flex-item orgs" style="border-right: 2px solid lightgray; margin: 1em 0;">
-                <h2>Организации:</h2>
+            <div class="flex-item" *ngIf="orgs.length > 0">
+                <h4>Учество во организации, иницијативи и настани:</h4>
                 <div class="cards">
-                    <div class="small-card">
+                    <div class="small-card" *ngFor="let org of orgs" [routerLink]="['/profile/view/' + org.id]">
                         <div class="image-container">
-                            <img src="../../assets/u1.png">
+                            <img [src]="org.photo">
                         </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-item initiatives">
-                <h2>Иницијативи:</h2>
-                    <div class="cards">
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
+                        <span>{{org.name}}</span>
                     </div>
                 </div>
             </div>
 
             <div class="btn p-4" style="width: 100%; border-top: 2px solid lightgray;">
-                <button mat-raised-button color="primary" style="padding: 0.33em 3em; margin-top: 1em; border: 2px solid black; border-radius: 0px !important;">КОНТАКТ</button>
+                <a [href]="'mailto:' + user.email"><button mat-raised-button color="primary" style="padding: 0.33em 3em; margin-top: 1em; border: 2px solid black; border-radius: 0px !important;">КОНТАКТ</button></a>
             </div>
         </div>
     </div>

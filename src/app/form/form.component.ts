@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../shared/auth.service';
+import { DataService } from '../shared/data.service';
 import { Entity, EntityType, User } from '../shared/interfaces';
-import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-form',
@@ -22,26 +24,28 @@ export class FormComponent implements OnInit {
   organisation = EntityType.ORGANISATION;
   initiative = EntityType.INITIATIVE;
   event = EntityType.EVENT;
-  user: User = {
-    id: 0,
-    email: '',
-    password: '',
-    avatar: this.avatars[0]
-  };
+  user: User = {};
   profile: Entity = {
     id: 0,
     name: '',
+    type: EntityType.ORGANISATION,
     date: new Date,
     description: '',
-    photo: 'https://i.ibb.co/KF2WBB3/u1.png',
+    photo: 'https://pbs.twimg.com/profile_images/902285656776433666/1_oP0zrz_400x400.jpg',
     creator: this.user,
     category: '',
     members: []
   };
+  entity: Entity = {};
 
-  constructor(private userService: UserService) { }
+  constructor(private dataService: DataService, private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.user = this.authService.getLoggedInUser();
+    let id = this.route.snapshot.paramMap.get('id') || '';
+    if(id) {
+      this.profile = this.dataService.getEntities().filter(x => x.id == Number(id))[0];
+    }
   }
 
   type = new FormControl('', [Validators.required]);
@@ -50,4 +54,11 @@ export class FormComponent implements OnInit {
   description = new FormControl('', [Validators.required]);
   photo = new FormControl('', [Validators.required]);
   category = new FormControl('', [Validators.required]);
+
+  createEntity() {
+    if(this.profile.name != '' && this.profile.description != '' && this.profile.category != '' && this.profile.photo != '') {
+      this.entity = this.dataService.addEntity(this.profile);
+      this.router.navigate(['/profile/view/' + this.entity.id]);
+    }
+  }
 }

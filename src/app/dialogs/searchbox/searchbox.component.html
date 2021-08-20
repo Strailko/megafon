@@ -4,6 +4,23 @@
             <mat-form-field appearance="fill">
               <input matInput (keyup.enter)="search()" type="text" placeholder="Пребараj..." [formControl]="query" [(ngModel)]="searchQuery" required>
             </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Категорија</mat-label>
+                <mat-select placeholder="Category" [(ngModel)]="category">
+                  <mat-option [value]="'organisations'">
+                    Организации
+                  </mat-option>
+                  <mat-option [value]="'events'">
+                    Настани
+                  </mat-option>
+                  <mat-option [value]="'profiles'">
+                    Профили
+                  </mat-option>
+                  <mat-option [value]="'initiatives'">
+                    Иницијативи
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
             <button mat-button color="primary" (click)="search()">
                 <mat-icon>search</mat-icon> Пребарај
             </button>

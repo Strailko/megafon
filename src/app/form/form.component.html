@@ -1,10 +1,10 @@
 <main>
     <div class="upper">
-        <h1>НОВА ОРГАНИЗАЦИЈА / ИНИЦИЈАТИВА / НАСТАН</h1>
+        <h1><button><mat-icon [routerLink]="['/']">reply</mat-icon></button> НОВА ОРГАНИЗАЦИЈА / ИНИЦИЈАТИВА / НАСТАН</h1>
         <div class="box">
             <mat-form-field appearance="fill">
-                <mat-label>Тип на профил</mat-label>
-                <mat-select placeholder="Type" [(ngModel)]="profile.type">
+                <mat-label>Тип</mat-label>
+                <mat-select placeholder="Type" [(ngModel)]="profile.type" required>
                   <mat-option [value]="this.organisation">
                       Организација
                   </mat-option>
@@ -22,7 +22,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Категорија</mat-label>
-                <mat-select placeholder="Category" [(ngModel)]="profile.category">
+                <mat-select placeholder="Category" [(ngModel)]="profile.category" required>
                   <mat-option [value]="'Екологија'">
                     Екологија
                   </mat-option>
@@ -45,7 +45,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Датум</mat-label>
-                <input matInput [matDatepicker]="picker" placeholder="Date" [(ngModel)]="profile.date">
+                <input matInput [matDatepicker]="picker" placeholder="Date" [(ngModel)]="profile.date" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -53,7 +53,7 @@
                 <mat-label>Краток опис</mat-label>
                 <textarea matInput placeholder="Description" [formControl]="description" [(ngModel)]="profile.description" required></textarea>
             </mat-form-field>
-            <div class="image-container">
+            <div class="image-container" style="margin-bottom: 1em;">
                 <img [src]="profile.photo">
             </div>
             <mat-form-field appearance="fill">
@@ -61,7 +61,7 @@
                 <input matInput type="text" placeholder="Photo" [formControl]="photo" [(ngModel)]="profile.photo" required>
             </mat-form-field>
             <div class="btn p-4" style="width: 100%;">
-                <button mat-raised-button color="primary" style="padding: 0.33em 3em; margin-top: 1em; border: 2px solid black; border-radius: 0px !important;"><mat-icon>save</mat-icon> КРЕИРАЈ</button>
+                <button mat-raised-button color="primary" (click)="createEntity()" style="padding: 0.33em 3em; margin-top: 1em; border: 2px solid black; border-radius: 0px !important;"><mat-icon>save</mat-icon> КРЕИРАЈ</button>
             </div>
         </div>
     </div>

@@ -2,55 +2,34 @@
     <div class="upper">
         <div class="box">
             <div class="profile-card flex items-center justify-center" style="width: 100%; flex-direction: column;">
+                <button *ngIf="user && isCreator" [routerLink]="['/profile/edit/' + profile.id]"><mat-icon>edit</mat-icon></button>
                 <div class="flex-item" style="padding-bottom: 0;">
                     <div class="image-container-profile">
-                        <img src="../../assets/u1.png">
+                        <img [src]="profile.photo">
                     </div>
                 </div>
                 <div class="flex-item p-4 text-black-900">
-                    <h1 style="margin: 0 !important; font-weight:500;">Lorem ipsum</h1>
+                    <h1 style="margin: 0 !important; font-weight:500;">{{ profile.name }}</h1>
                 </div>
             </div>
-            <div class="profile-card p-4 text-gray-800" style="text-align: left; width: 100%; border-bottom: 2px solid lightgray;">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus, deleniti reprehenderit pariatur repellat in fuga voluptas magnam odit blanditiis mollitia perspiciatis quibusdam sunt quam inventore velit modi possimus earum amet.
+            <div class="profile-card p-4 text-gray-800" style="text-align: center; width: 100%; padding-bottom: 2em; border-bottom: 2px solid lightgray;">
+                {{ profile.description }}
             </div>
-            <div class="flex-item orgs" style="border-right: 2px solid lightgray; margin: 1em 0;">
-                <h2>Организации:</h2>
-                <div class="cards">
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-item initiatives">
-                <h2>Иницијативи:</h2>
+
+            <div class="flex-item">
+                <h2>Членови:</h2>
                     <div class="cards">
-                    <div class="small-card">
+                    <div class="small-card" *ngFor="let user of profile.members" [routerLink]="['/userprofile/' + user.id]">
                         <div class="image-container">
-                            <img src="../../assets/u1.png">
+                            <img [src]="user.avatar">
                         </div><br>
-                        <span>Lorem ipsum</span>
-                    </div>
-                    <div class="small-card">
-                        <div class="image-container">
-                            <img src="../../assets/u1.png">
-                        </div><br>
-                        <span>Lorem ipsum</span>
+                        <span>{{ user.name }} {{ user.surname }}</span>
                     </div>
                 </div>
             </div>
 
             <div class="btn p-4" style="width: 100%; border-top: 2px solid lightgray;">
-                <button mat-raised-button color="primary" style="padding: 0.33em 3em; margin-top: 1em; border: 2px solid black; border-radius: 0px !important;">ПРИКЛУЧИ СЕ</button>
+                <button mat-raised-button color="primary" style="padding: 0.33em 3em; margin-top: 1em; border: 2px solid black; border-radius: 0px !important;" (click)="join()">ПРИКЛУЧИ СЕ</button>
             </div>
         </div>
     </div>

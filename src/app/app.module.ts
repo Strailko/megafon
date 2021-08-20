@@ -20,8 +20,6 @@ import { SearchboxComponent } from './dialogs/searchbox/searchbox.component';
 import { LoginComponent } from './dialogs/login/login.component';
 import { RegisterComponent } from './dialogs/register/register.component';
 import { FormComponent } from './form/form.component';
-import { NewsComponent } from './news/news.component';
-import { NewpostComponent } from './newpost/newpost.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +35,7 @@ import { NewpostComponent } from './newpost/newpost.component';
     SearchboxComponent,
     LoginComponent,
     RegisterComponent,
-    FormComponent,
-    NewsComponent,
-    NewpostComponent
+    FormComponent
   ],
   imports: [
     BrowserModule,
